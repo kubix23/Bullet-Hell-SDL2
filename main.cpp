@@ -13,7 +13,7 @@ extern "C" {
 }
 
 #define SCREEN_WIDTH	1000
-#define SCREEN_HEIGHT	1000
+#define SCREEN_HEIGHT	700
 #define TICK_INTERVAL   20 //1000/THIS VALUE = FPS
 #define SPEED			5 //1-10
 #define ALPHACOLOR		0xFEFEFE
@@ -580,7 +580,7 @@ int loadGui(SDL_Surface* screen, float gameTime, SDL_Surface* charset, int print
 	static int score = 0;
 	char grade;
 
-	if (player->health <= 0) {
+	if (player->health <= 0 || *game == 4) {
 		SDL_Surface* temp = SDL_CreateRGBSurface(0, screen->w, screen->h, 32,
 			0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 
@@ -625,8 +625,6 @@ int loadGui(SDL_Surface* screen, float gameTime, SDL_Surface* charset, int print
 		SDL_FillRect(screen, &from2, ALPHACOLOR);
 		SDL_FillRect(screen, &from3, ALPHACOLOR);
 		SDL_FreeSurface(temp);
-	}
-	else if(*game < 0){;
 	}
 	else {
 		SDL_Surface* heartFull = SDL_LoadBMP("./fullheart.bmp");
@@ -924,7 +922,7 @@ int main(int argc, char **argv) {
 
 					break;
 				case SDL_QUIT:
-					if (game = 0) {
+					if (game == 0) {
 						quit = 1;
 					}
 					break;
